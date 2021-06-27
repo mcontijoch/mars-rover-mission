@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace MContijoch\Test;
 
+use InvalidArgumentException;
 use MContijoch\MarsRoverMission\Position\Position;
 use MContijoch\MarsRoverMission\Rover\Rover;
+use MContijoch\MarsRoverMission\Surface\Exceptions\InvalidMovementException;
 use PHPUnit\Framework\TestCase;
 
 final class RoverTest extends TestCase
@@ -198,4 +200,26 @@ final class RoverTest extends TestCase
 
     // SURFACE OBSTACLES
 
+    /** @test */
+    public function itShouldThrowInvalidArgumentExceptionIfObstaclePositionIsInvalid(): void
+    {
+        $this->expectException(\InvalidArgumentException::class);
+
+        Rover::create(100, 100, 'N', 200, 200, [[201, 201]]);
+    }
+
+    /** @test */
+    public function itShouldMoveCorrectlyOnAConcretCommandWithObstacles(): void
+    {
+        $rover = Rover::create(100, 100, 'N', 200, 200, [[102, 102]]);
+
+        $this->expectException(InvalidMovementException::class);
+
+        $rover->move('FFRRFFFRL');
+
+        self::assertEquals(
+            $rover->position,
+            new Position(102, 101)
+        );
+    }
 }

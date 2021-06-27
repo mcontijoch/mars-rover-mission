@@ -7,6 +7,7 @@ namespace MContijoch\MarsRoverMission\Rover;
 use MContijoch\MarsRoverMission\Command\CommandCollection;
 use MContijoch\MarsRoverMission\CardinalPoint\CardinalPoint;
 use MContijoch\MarsRoverMission\Position\Position;
+use MContijoch\MarsRoverMission\Surface\Exceptions\InvalidMovementException;
 use MContijoch\MarsRoverMission\Surface\Surface;
 
 final class Rover
@@ -24,13 +25,13 @@ final class Rover
         $this->cardinalPoint = $cardinalPoint;
     }
 
-    public static function create(int $positionX,int $positionY, string $pointString, int $surfaceX = null, int $surfaceY = null)
+    public static function create(int $positionX, int $positionY, string $pointString, int $surfaceX = null, int $surfaceY = null, array $obstacles = null)
     {
         $position = new Position($positionX, $positionY);
 
         $cardinalPoint = CardinalPoint::getCardinalPointByInitialLetter($pointString);
 
-        $surface = new Surface($surfaceX, $surfaceY);
+        $surface = new Surface($surfaceX, $surfaceY, $obstacles);
 
         return new self($position, $cardinalPoint, $surface);
     }
@@ -56,8 +57,12 @@ final class Rover
         foreach ($commandCollection->commands as $command) {
             $newPosition = $command->move($this->position, $this->cardinalPoint);
 
-            // Check if surface has an obstacle
-            $this->surface->ensurePositionIsValid($newPosition);
+            // try {
+                $this->surface->ensureNextPositionIsValid($newPosition);
+            // } catch (InvalidMovementException $e) {
+            //     echo $e->getMessage();
+            //     break;
+            // }
 
             $this->setPosition($newPosition);
         }

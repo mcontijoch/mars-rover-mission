@@ -4,41 +4,18 @@ declare(strict_types=1);
 
 namespace MContijoch\Test;
 
-use MContijoch\MarsRoverMission\Command\Command;
-use MContijoch\MarsRoverMission\Command\CommandCollection;
-use MContijoch\MarsRoverMission\Command\ValueObjects\CommandString;
-use MContijoch\MarsRoverMission\CardinalPoint\CardinalPoint;
-use MContijoch\MarsRoverMission\CardinalPoint\East;
-use MContijoch\MarsRoverMission\CardinalPoint\North;
-use MContijoch\MarsRoverMission\CardinalPoint\South;
-use MContijoch\MarsRoverMission\CardinalPoint\ValueObjects\Point;
-use MContijoch\MarsRoverMission\CardinalPoint\West;
-use MContijoch\MarsRoverMission\Command\Forward;
 use MContijoch\MarsRoverMission\Position\Position;
-use MContijoch\MarsRoverMission\Position\ValueObjects\PositionX;
-use MContijoch\MarsRoverMission\Position\ValueObjects\PositionY;
 use MContijoch\MarsRoverMission\Rover\Rover;
-use MContijoch\MarsRoverMission\Surface\Surface;
 use PHPUnit\Framework\TestCase;
 
 final class RoverTest extends TestCase
 {
     /** @test */
-    public function test(): void
-    {
-        self::assertEquals(1, 1);
-    }
-
-    /** @test */
     public function itShouldThrowInvalidArgumentExceptionIfPositionIsInvalid(): void
     {
         $this->expectException(\InvalidArgumentException::class);
 
-        new Rover(
-            new Position(400, 400),
-            new Surface(),
-            new North(),
-        );
+        Rover::create(400, 400, 'N');
     }
 
     // NORTH
@@ -46,11 +23,7 @@ final class RoverTest extends TestCase
     /** @test */
     public function itShouldMoveForwardOnNorth(): void
     {
-        $rover = new Rover(
-            new Position(100, 100),
-            new Surface(),
-            new North(),
-        );
+        $rover = Rover::create(100, 100, 'N');
 
         $rover->move('F');
 
@@ -63,11 +36,7 @@ final class RoverTest extends TestCase
     /** @test */
     public function itShouldMoveLeftOnNorth(): void
     {
-        $rover = new Rover(
-            new Position(100, 100),
-            new Surface(),
-            new North(),
-        );
+        $rover = Rover::create(100, 100, 'N');
 
         $rover->move('L');
 
@@ -80,11 +49,7 @@ final class RoverTest extends TestCase
     /** @test */
     public function itShouldMoveRightOnNorth(): void
     {
-        $rover = new Rover(
-            new Position(100, 100),
-            new Surface(),
-            new North(),
-        );
+        $rover = Rover::create(100, 100, 'N');
 
         $rover->move('R');
 
@@ -99,11 +64,7 @@ final class RoverTest extends TestCase
     /** @test */
     public function itShouldMoveForwardOnSouth(): void
     {
-        $rover = new Rover(
-            new Position(100, 100),
-            new Surface(),
-            new South(),
-        );
+        $rover = Rover::create(100, 100, 'S');
 
         $rover->move('F');
 
@@ -116,11 +77,7 @@ final class RoverTest extends TestCase
     /** @test */
     public function itShouldMoveLeftOnSouth(): void
     {
-        $rover = new Rover(
-            new Position(100, 100),
-            new Surface(),
-            new South(),
-        );
+        $rover = Rover::create(100, 100, 'S');
 
         $rover->move('L');
 
@@ -133,11 +90,7 @@ final class RoverTest extends TestCase
     /** @test */
     public function itShouldMoveRightOnSouth(): void
     {
-        $rover = new Rover(
-            new Position(100, 100),
-            new Surface(),
-            new South(),
-        );
+        $rover = Rover::create(100, 100, 'S');
 
         $rover->move('R');
 
@@ -153,11 +106,7 @@ final class RoverTest extends TestCase
     /** @test */
     public function itShouldMoveForwardOnEast(): void
     {
-        $rover = new Rover(
-            new Position(100, 100),
-            new Surface(),
-            new East(),
-        );
+        $rover = Rover::create(100, 100, 'E');
 
         $rover->move('F');
 
@@ -170,11 +119,7 @@ final class RoverTest extends TestCase
     /** @test */
     public function itShouldMoveLeftOnEast(): void
     {
-        $rover = new Rover(
-            new Position(100, 100),
-            new Surface(),
-            new East(),
-        );
+        $rover = Rover::create(100, 100, 'E');
 
         $rover->move('L');
 
@@ -187,11 +132,7 @@ final class RoverTest extends TestCase
     /** @test */
     public function itShouldMoveRightOnEast(): void
     {
-        $rover = new Rover(
-            new Position(100, 100),
-            new Surface(),
-            new East(),
-        );
+        $rover = Rover::create(100, 100, 'E');
 
         $rover->move('R');
 
@@ -206,11 +147,7 @@ final class RoverTest extends TestCase
     /** @test */
     public function itShouldMoveForwardOnWest(): void
     {
-        $rover = new Rover(
-            new Position(100, 100),
-            new Surface(),
-            new West(),
-        );
+        $rover = Rover::create(100, 100, 'W');
 
         $rover->move('F');
 
@@ -223,11 +160,7 @@ final class RoverTest extends TestCase
     /** @test */
     public function itShouldMoveLeftOnWest(): void
     {
-        $rover = new Rover(
-            new Position(100, 100),
-            new Surface(),
-            new West(),
-        );
+        $rover = Rover::create(100, 100, 'W');
 
         $rover->move('L');
 
@@ -240,11 +173,7 @@ final class RoverTest extends TestCase
     /** @test */
     public function itShouldMoveRightOnWest(): void
     {
-        $rover = new Rover(
-            new Position(100, 100),
-            new Surface(),
-            new West(),
-        );
+        $rover = Rover::create(100, 100, 'W');
 
         $rover->move('R');
 
@@ -257,11 +186,7 @@ final class RoverTest extends TestCase
     /** @test */
     public function itShouldMoveCorrectlyOnAConcretCommand(): void
     {
-        $rover = new Rover(
-            new Position(100, 100),
-            new Surface(),
-            new North(),
-        );
+        $rover = Rover::create(100, 100, 'N');
 
         $rover->move('FFRRFFFRL');
 
@@ -270,4 +195,7 @@ final class RoverTest extends TestCase
             new Position(105, 102)
         );
     }
+
+    // SURFACE OBSTACLES
+
 }

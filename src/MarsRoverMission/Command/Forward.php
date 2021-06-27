@@ -17,7 +17,6 @@ class Forward extends Command
 
     public function move(Position $position, CardinalPoint $cardinalPoint): Position
     {
-        $newPositon = $cardinalPoint->moveForward($position);
-        return $newPositon;
+        return $cardinalPoint->moveForward($position);
     }
 }

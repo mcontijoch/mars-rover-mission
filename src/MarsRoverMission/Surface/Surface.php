@@ -4,21 +4,22 @@ declare(strict_types=1);
 
 namespace MContijoch\MarsRoverMission\Surface;
 
-use MContijoch\MarsRoverMission\Surface\ValueObjects\SurfaceX;
-use MContijoch\MarsRoverMission\Surface\ValueObjects\SurfaceY;
+use MContijoch\MarsRoverMission\Position\Position;
 
 final class Surface
 {
     const DEFAULT_X = 200;
     const DEFAULT_Y = 200;
 
-    protected $x;
-    protected $y;
+    private $x;
+    private $y;
+    private $obstacles;
 
-    public function __construct(int $x = null, int $y = null)
+    public function __construct(int $x = null, int $y = null, array $obstacles = null)
     {
         $this->x = $x === null ? self::DEFAULT_X : $x;
         $this->y = $y === null ? self::DEFAULT_Y : $y;
+        $this->obstacles = $obstacles === null ? [] : $obstacles;
     }
 
     public function getX(): int
@@ -29,5 +30,9 @@ final class Surface
     public function getY(): int
     {
         return $this->y;
+    }
+
+    public function ensurePositionIsValid(Position $position)
+    {
     }
 }

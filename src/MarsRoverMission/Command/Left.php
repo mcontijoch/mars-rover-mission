@@ -17,7 +17,6 @@ class Left extends Command
 
     public function move(Position $position, CardinalPoint $cardinalPoint): Position
     {
-        $newPositon = $cardinalPoint->moveLeft($position);
-        return $newPositon;
+        return $cardinalPoint->moveLeft($position);
     }
 }

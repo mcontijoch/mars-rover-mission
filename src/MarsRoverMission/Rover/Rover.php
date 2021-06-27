@@ -12,10 +12,10 @@ use MContijoch\MarsRoverMission\Surface\Surface;
 final class Rover
 {
     public $position;
-    public $surface;
     public $cardinalPoint;
+    public $surface;
 
-    public function __construct(Position $position, Surface $surface, CardinalPoint $cardinalPoint)
+    private function __construct(Position $position, CardinalPoint $cardinalPoint, Surface $surface)
     {
         $this->ensurePositionIsInSurface($position, $surface);
 
@@ -24,7 +24,18 @@ final class Rover
         $this->cardinalPoint = $cardinalPoint;
     }
 
-    public function ensurePositionIsInSurface(Position $position, Surface $surface): void
+    public static function create(int $positionX,int $positionY, string $pointString, int $surfaceX = null, int $surfaceY = null)
+    {
+        $position = new Position($positionX, $positionY);
+
+        $cardinalPoint = CardinalPoint::getCardinalPointByInitialLetter($pointString);
+
+        $surface = new Surface($surfaceX, $surfaceY);
+
+        return new self($position, $cardinalPoint, $surface);
+    }
+
+    private function ensurePositionIsInSurface(Position $position, Surface $surface): void
     {
         $positionXIsInSurfaceX = $position->getX() <= $surface->getX();
         $positionYIsInSurfaceY = $position->getY() <= $surface->getY();
@@ -46,13 +57,16 @@ final class Rover
             $newPosition = $command->move($this->position, $this->cardinalPoint);
 
             // Check if surface has an obstacle
+            $this->surface->ensurePositionIsValid($newPosition);
 
             $this->setPosition($newPosition);
         }
     }
 
-    public function setPosition(Position $position)
+    private function setPosition(Position $position)
     {
+        $this->ensurePositionIsInSurface($position, $this->surface);
+
         $this->position = $position;
     }
 }

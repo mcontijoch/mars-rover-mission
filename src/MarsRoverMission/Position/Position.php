@@ -4,9 +4,6 @@ declare(strict_types=1);
 
 namespace MContijoch\MarsRoverMission\Position;
 
-use MContijoch\MarsRoverMission\CardinalPoint\CardinalPoint;
-use MContijoch\MarsRoverMission\Command\Command;
-
 final class Position
 {
     public $x;
@@ -38,43 +35,23 @@ final class Position
         $this->y = $value;
     }
 
-    public function move(Command $command, CardinalPoint $cardinalPoint)
-    {
-        return $command->move($this, $cardinalPoint);
-    }
-
-    public function increaseX()
+    public function increaseX(): void
     {
         $this->setX($this->x + 1);
     }
 
-    public function decreaseX()
+    public function decreaseX(): void
     {
         $this->setX($this->x - 1);
     }
 
-    public function increaseY()
+    public function increaseY(): void
     {
         $this->setY($this->y + 1);
     }
 
-    public function decreaseY()
+    public function decreaseY(): void
     {
         $this->setY($this->y - 1);
-    }
-
-    public function moveForward(CardinalPoint $cardinalPoint): Position
-    {
-        return $cardinalPoint->moveForward($this->position);
-    }
-
-    public function moveRight(CardinalPoint $cardinalPoint): Position
-    {
-        return $cardinalPoint->moveRight($this->position);
-    }
-
-    public function moveLeft(CardinalPoint $cardinalPoint): Position
-    {
-        return $cardinalPoint->moveLeft($this->position);
     }
 }

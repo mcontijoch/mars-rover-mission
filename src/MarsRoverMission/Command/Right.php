@@ -17,8 +17,6 @@ class Right extends Command
 
     public function move(Position $position, CardinalPoint $cardinalPoint): Position
     {
-        $newPositon = $cardinalPoint->moveRight($position);
-        return $newPositon;
-        // return $position->moveRight($cardinalPoint);
+        return $cardinalPoint->moveRight($position);
     }
 }

@@ -1,5 +1,5 @@
 {
-  "name": "mconitjoch/rover",
+  "name": "mconitjoch/mars-rover-mission",
   "description": "Housfy Mars Rover Mission Technical Test",
   "type": "project",
   "keywords": [],
@@ -13,7 +13,8 @@
     }
   ],
   "require": {
-    "php": "^7.4"
+    "php": "^7.4",
+    "lambdish/phunctional": "^2.1"
   },
   "require-dev": {
     "jakub-onderka/php-parallel-lint": "^1.0",
@@ -24,12 +25,12 @@
   },
   "autoload": {
     "psr-4": {
-      "MConitjoch\\Rover\\": "src/"
+      "MContijoch\\": "src/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "MConitjoch\\Rover\\Test\\": "tests/"
+      "MContijoch\\": "tests/"
     }
   },
   "minimum-stability": "stable",

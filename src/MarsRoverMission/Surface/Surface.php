@@ -50,7 +50,6 @@ final class Surface
         $obstacles = [];
 
         foreach ($obstaclesArray as $obstacle) {
-
             $x = $obstacle[0];
             $y = $obstacle[1];
 

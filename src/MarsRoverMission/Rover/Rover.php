@@ -25,8 +25,14 @@ final class Rover
         $this->cardinalPoint = $cardinalPoint;
     }
 
-    public static function create(int $positionX, int $positionY, string $pointString, int $surfaceX = null, int $surfaceY = null, array $obstacles = null)
-    {
+    public static function create(
+        int $positionX,
+        int $positionY,
+        string $pointString,
+        int $surfaceX = null,
+        int $surfaceY = null,
+        array $obstacles = null
+    ) {
         $position = new Position($positionX, $positionY);
 
         $cardinalPoint = CardinalPoint::getCardinalPointByInitialLetter($pointString);
@@ -57,12 +63,12 @@ final class Rover
         foreach ($commandCollection->commands as $command) {
             $newPosition = $command->move($this->position, $this->cardinalPoint);
 
-            // try {
+            try {
                 $this->surface->ensureNextPositionIsValid($newPosition);
-            // } catch (InvalidMovementException $e) {
-            //     echo $e->getMessage();
-            //     break;
-            // }
+            } catch (InvalidMovementException $e) {
+                echo $e->getMessage();
+                break;
+            }
 
             $this->setPosition($newPosition);
         }

@@ -213,7 +213,8 @@ final class RoverTest extends TestCase
     {
         $rover = Rover::create(100, 100, 'N', 200, 200, [[102, 102]]);
 
-        $this->expectException(InvalidMovementException::class);
+        // $this->expectException(InvalidMovementException::class);
+        $this->expectOutputString('There is an obstacle in the road.');
 
         $rover->move('FFRRFFFRL');
 

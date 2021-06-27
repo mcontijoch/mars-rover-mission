@@ -40,4 +40,12 @@ abstract class CardinalPoint
                 break;
         }
     }
+
+    public function createNewPosition(Position $position): Position
+    {
+        return new Position(
+            $position->getX(),
+            $position->getY(),
+        );
+    }
 }

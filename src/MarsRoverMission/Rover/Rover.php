@@ -32,7 +32,7 @@ final class Rover
         int $surfaceX = null,
         int $surfaceY = null,
         array $obstacles = null
-    ) {
+    ): self {
         $position = new Position($positionX, $positionY);
 
         $cardinalPoint = CardinalPoint::getCardinalPointByInitialLetter($pointString);
@@ -74,7 +74,7 @@ final class Rover
         }
     }
 
-    private function setPosition(Position $position)
+    private function setPosition(Position $position): void
     {
         $this->ensurePositionIsInSurface($position, $this->surface);
 

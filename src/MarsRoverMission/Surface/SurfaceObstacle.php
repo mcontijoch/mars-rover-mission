@@ -27,7 +27,7 @@ final class SurfaceObstacle
         return $this->y;
     }
 
-    public function ensureObstacleIsValid(int $x, int $y, Surface $surface)
+    public function ensureObstacleIsValid(int $x, int $y, Surface $surface): void
     {
         $positionXIsInSurfaceX = $x <= $surface->getX();
         $positionYIsInSurfaceY = $y <= $surface->getY();

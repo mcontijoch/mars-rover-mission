@@ -4,10 +4,8 @@ declare(strict_types=1);
 
 namespace MContijoch\Test;
 
-use InvalidArgumentException;
 use MContijoch\MarsRoverMission\Position\Position;
 use MContijoch\MarsRoverMission\Rover\Rover;
-use MContijoch\MarsRoverMission\Surface\Exceptions\InvalidMovementException;
 use PHPUnit\Framework\TestCase;
 
 final class RoverTest extends TestCase
@@ -29,7 +27,7 @@ final class RoverTest extends TestCase
 
         $rover->move('F');
 
-        self::assertEquals(
+        $this->assertEquals(
             $rover->position,
             new Position(101, 100)
         );
@@ -42,7 +40,7 @@ final class RoverTest extends TestCase
 
         $rover->move('L');
 
-        self::assertEquals(
+        $this->assertEquals(
             $rover->position,
             new Position(100, 99)
         );
@@ -55,7 +53,7 @@ final class RoverTest extends TestCase
 
         $rover->move('R');
 
-        self::assertEquals(
+        $this->assertEquals(
             $rover->position,
             new Position(100, 101)
         );
@@ -70,7 +68,7 @@ final class RoverTest extends TestCase
 
         $rover->move('F');
 
-        self::assertEquals(
+        $this->assertEquals(
             $rover->position,
             new Position(99, 100)
         );
@@ -83,7 +81,7 @@ final class RoverTest extends TestCase
 
         $rover->move('L');
 
-        self::assertEquals(
+        $this->assertEquals(
             $rover->position,
             new Position(100, 101)
         );
@@ -96,7 +94,7 @@ final class RoverTest extends TestCase
 
         $rover->move('R');
 
-        self::assertEquals(
+        $this->assertEquals(
             $rover->position,
             new Position(100, 99)
         );
@@ -112,7 +110,7 @@ final class RoverTest extends TestCase
 
         $rover->move('F');
 
-        self::assertEquals(
+        $this->assertEquals(
             $rover->position,
             new Position(100, 101)
         );
@@ -125,7 +123,7 @@ final class RoverTest extends TestCase
 
         $rover->move('L');
 
-        self::assertEquals(
+        $this->assertEquals(
             $rover->position,
             new Position(101, 100)
         );
@@ -138,7 +136,7 @@ final class RoverTest extends TestCase
 
         $rover->move('R');
 
-        self::assertEquals(
+        $this->assertEquals(
             $rover->position,
             new Position(99, 100)
         );
@@ -153,7 +151,7 @@ final class RoverTest extends TestCase
 
         $rover->move('F');
 
-        self::assertEquals(
+        $this->assertEquals(
             $rover->position,
             new Position(100, 99)
         );
@@ -166,7 +164,7 @@ final class RoverTest extends TestCase
 
         $rover->move('L');
 
-        self::assertEquals(
+        $this->assertEquals(
             $rover->position,
             new Position(99, 100)
         );
@@ -179,7 +177,7 @@ final class RoverTest extends TestCase
 
         $rover->move('R');
 
-        self::assertEquals(
+        $this->assertEquals(
             $rover->position,
             new Position(101, 100)
         );
@@ -192,7 +190,7 @@ final class RoverTest extends TestCase
 
         $rover->move('FFRRFFFRL');
 
-        self::assertEquals(
+        $this->assertEquals(
             $rover->position,
             new Position(105, 102)
         );
@@ -213,12 +211,11 @@ final class RoverTest extends TestCase
     {
         $rover = Rover::create(100, 100, 'N', 200, 200, [[102, 102]]);
 
-        // $this->expectException(InvalidMovementException::class);
         $this->expectOutputString('There is an obstacle in the road.');
 
         $rover->move('FFRRFFFRL');
 
-        self::assertEquals(
+        $this->assertEquals(
             $rover->position,
             new Position(102, 101)
         );

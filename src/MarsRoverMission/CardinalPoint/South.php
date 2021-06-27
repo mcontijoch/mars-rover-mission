@@ -16,10 +16,7 @@ class South extends CardinalPoint
 
     public function moveForward(Position $position): Position
     {
-        $newPosition = new Position(
-            $position->getX(),
-            $position->getY(),
-        );
+        $newPosition = $this->createNewPosition($position);
 
         $newPosition->decreaseX();
 
@@ -28,10 +25,7 @@ class South extends CardinalPoint
 
     public function moveRight(Position $position): Position
     {
-        $newPosition = new Position(
-            $position->getX(),
-            $position->getY(),
-        );
+        $newPosition = $this->createNewPosition($position);
 
         $newPosition->decreaseY();
 
@@ -40,10 +34,7 @@ class South extends CardinalPoint
 
     public function moveLeft(Position $position): Position
     {
-        $newPosition = new Position(
-            $position->getX(),
-            $position->getY(),
-        );
+        $newPosition = $this->createNewPosition($position);
 
         $newPosition->increaseY();
 
